@@ -1,14 +1,14 @@
 {
-  "name": "base-entity-utils",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@hcarcamovasquez/base-entity-utils",
+  "version": "0.0.1",
+  "description": "Dedicated to reducing code when working with classes and also helping to work with immutable objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-node src/examples/basic.ts"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
@@ -18,15 +18,19 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "ts-node": "^10.4.0",
     "@types/node": "^16.11.7",
     "@types/uuid": "^8.3.4"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hcarcamovasquez/base-entity-utils.git"
   },
   "author": "https://github.com/hcarcamovasquez",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hcarcamovasquez/base-entity-utils/issues"
   },

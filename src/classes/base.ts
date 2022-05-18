@@ -1,16 +1,19 @@
+import 'reflect-metadata'
 import {ClassTransformOptions, instanceToPlain, plainToClassFromExist} from "class-transformer";
 import {validateOrReject} from "class-validator";
 import {omitConstructorAttributes, omitCopyOf} from "../types/entity-utils.types";
+import {Metadata} from "./metadata";
 
-export class Base<Entity> {
+export class Base<Entity> implements Metadata {
 
-    public readonly id: string
-
+    readonly createdAt: string;
+    readonly updatedAt: string;
 
     constructor(init: Omit<Partial<Entity>, omitConstructorAttributes>) {
-        this.transform({
-            ...init
-        })
+        if (!init) {
+            return;
+        }
+        this.transform(init)
     }
 
     public transform(data, options: ClassTransformOptions = {ignoreDecorators: true}): void {
@@ -18,10 +21,11 @@ export class Base<Entity> {
     }
 
 
-
     static copyOf<T>(entity: T, updated: Omit<Partial<T>, omitCopyOf>) {
 
         const updatedInmutable = plainToClassFromExist({}, updated, {ignoreDecorators: true})
+
+        Object.assign(updatedInmutable, {updatedAt: new Date().toISOString()})
 
         const e = Base.assign(entity, updatedInmutable) as T
 
@@ -31,7 +35,7 @@ export class Base<Entity> {
     }
 
 
-    protected static assign<T>(obj: any, newData: object) {
+    protected static assign<T>(obj: any, newData: object,first = true) {
         let result;
         const proto = Object.getPrototypeOf(obj);
         if (proto === null) {
@@ -49,11 +53,12 @@ export class Base<Entity> {
 
                 if (typeof newData[key] !== 'object' ||
                     Reflect.ownKeys(newData[key]).length === 0 ||
-                    Array.isArray(Reflect.ownKeys(newData[key]))) {
+                    Array.isArray(Reflect.ownKeys(newData[key]))
+                ) {
                     result[key] = newData[key];
 
                 } else {
-                    result[key] = Base.assign(obj[key], newData[key]);
+                    result[key] = Base.assign(obj[key], newData[key],false);
                 }
             }
 
@@ -78,4 +83,5 @@ export class Base<Entity> {
     public toJSON(options: ClassTransformOptions = {ignoreDecorators: true}): Record<string, any> {
         return instanceToPlain(this, options);
     }
+
 }

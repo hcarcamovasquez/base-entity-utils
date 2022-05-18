@@ -1,6 +1,6 @@
 {
-  "name": "@hcarcamovasquez/base-entity-utils",
-  "version": "0.0.1",
+  "name": "@betoh/base-entity-utils",
+  "version": "0.0.6",
   "description": "Dedicated to reducing code when working with classes and also helping to work with immutable objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,8 @@
     "@types/uuid": "^8.3.4"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "access": "public",
+    "registry":"https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",

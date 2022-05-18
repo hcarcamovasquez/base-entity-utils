@@ -27,7 +27,6 @@ export class DemoSimple {
         this.name = name
     }
 }
-
 const name = new Demo({
     name: 'Lorem Ipsum',
     optional: 'es simplemente el texto de relleno de las imprentas y archivos de texto',

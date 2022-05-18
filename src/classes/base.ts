@@ -9,7 +9,7 @@ export class Base<Entity> implements Metadata {
     readonly createdAt: string;
     readonly updatedAt: string;
 
-    constructor(init: omitConstructor<Entity>) {
+    constructor(init: string |omitConstructor<Entity>) {
         if (!init) {
             return;
         }

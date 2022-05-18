@@ -6,7 +6,7 @@ export enum IdNameEnum {
     id = 'id'
 }
 
-export const model = (idNameEnum?: IdNameEnum | keyof typeof IdNameEnum, seed?: string) => {
+export const model = (idNameEnum?: keyof typeof IdNameEnum, seed?: string) => {
 
     switch (idNameEnum) {
         case IdNameEnum.id:

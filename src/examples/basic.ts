@@ -28,7 +28,6 @@ export class DemoSimple {
     }
 }
 
-
 const name = new Demo({
     name: 'Lorem Ipsum',
     optional: 'es simplemente el texto de relleno de las imprentas y archivos de texto',
@@ -42,6 +41,7 @@ const name = new Demo({
 
 console.log(name)
 Object.freeze(name)
+
 
 setTimeout(() => {
     const hola = Demo

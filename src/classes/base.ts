@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import {ClassTransformOptions, instanceToPlain, plainToClassFromExist} from "class-transformer";
 import {validateOrReject} from "class-validator";
-import {omitConstructorAttributes, omitCopyOf} from "../types/entity-utils.types";
+import {draft, omitConstructor} from "../types/entity-utils.types";
 import {Metadata} from "./metadata";
 
 export class Base<Entity> implements Metadata {
@@ -9,7 +9,7 @@ export class Base<Entity> implements Metadata {
     readonly createdAt: string;
     readonly updatedAt: string;
 
-    constructor(init: Omit<Partial<Entity>, omitConstructorAttributes>) {
+    constructor(init: omitConstructor<Entity>) {
         if (!init) {
             return;
         }
@@ -21,7 +21,7 @@ export class Base<Entity> implements Metadata {
     }
 
 
-    static copyOf<T>(entity: T, updated: Omit<Partial<T>, omitCopyOf>) {
+    static copyOf<T>(entity: T, updated: draft<T>) {
 
         const updatedInmutable = plainToClassFromExist({}, updated, {ignoreDecorators: true})
 
@@ -35,7 +35,7 @@ export class Base<Entity> implements Metadata {
     }
 
 
-    protected static assign<T>(obj: any, newData: object,first = true) {
+    private static assign<T>(obj: any, newData: object) {
         let result;
         const proto = Object.getPrototypeOf(obj);
         if (proto === null) {
@@ -58,7 +58,7 @@ export class Base<Entity> implements Metadata {
                     result[key] = newData[key];
 
                 } else {
-                    result[key] = Base.assign(obj[key], newData[key],false);
+                    result[key] = Base.assign(obj[key], newData[key]);
                 }
             }
 

@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import {ClassTransformOptions, instanceToPlain, plainToClassFromExist} from "class-transformer";
 import {validateOrReject} from "class-validator";
 import {draft, omitConstructor} from "../types/entity-utils.types";
-import {Metadata} from "./metadata";
+import {Metadata} from "../interfaces/metadata";
 
 export class Base<Entity> implements Metadata {
 

@@ -1,5 +1,5 @@
 import {v4, v5} from "uuid";
-import {BaseIdIdentification, BaseUuidIdentification} from "../classes/metadata";
+import {BaseIdIdentification, BaseUuidIdentification} from "../interfaces/metadata";
 
 export enum IdNameEnum {
     uuid = 'uuid',

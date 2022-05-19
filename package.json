@@ -1,6 +1,6 @@
 {
   "name": "@betoh/base-entity-utils",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Dedicated to reducing code when working with classes and also helping to work with immutable objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,9 @@
     "dist"
   ],
   "scripts": {
-    "test": "ts-node src/examples/basic.ts"
+    "test": "ts-node src/examples/basic.ts",
+    "build": "tsc",
+    "publish": "yarn run build && npm publish --access public"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",

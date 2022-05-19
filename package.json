@@ -1,6 +1,6 @@
 {
   "name": "@betoh/base-entity-utils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Dedicated to reducing code when working with classes and also helping to work with immutable objects.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

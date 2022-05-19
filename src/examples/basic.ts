@@ -58,11 +58,11 @@ setTimeout(() => {
 }, 1000)
 
 
-console.log(new Demo({
+console.log(new Demo(JSON.stringify({
     name: 'Lorem Ipsum',
     optional: 'es simplemente el texto de relleno de las imprentas y archivos de texto',
     arr: ['párrafos', 'palabras']
-}))
+})))
 
 
 console.log(new DemoSimple('El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras'))

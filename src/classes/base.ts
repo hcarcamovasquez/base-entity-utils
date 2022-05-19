@@ -9,19 +9,28 @@ export class Base<Entity> implements Metadata {
     readonly createdAt: string;
     readonly updatedAt: string;
 
-    constructor(init: string |omitConstructor<Entity>) {
+    constructor(init: string | omitConstructor<Entity>) {
         if (!init) {
             return;
         }
         this.transform(init)
     }
 
-    public transform(data, options: ClassTransformOptions = {ignoreDecorators: true}): void {
-        plainToClassFromExist(this, data, options)
+    private transform(data, options: ClassTransformOptions = {ignoreDecorators: true}): void {
+
+        if (typeof data === 'string') {
+            try {
+                data = JSON.parse(data);
+            } catch {
+            }
+        }
+
+        if (typeof data === 'object') {
+            plainToClassFromExist(this, data, options);
+        }
     }
 
-
-    static copyOf<T>(entity: T, updated: draft<T>) {
+    static copyOf<T>(entity: T, updated: draft<T>): T {
 
         const updatedInmutable = plainToClassFromExist({}, updated, {ignoreDecorators: true})
 
@@ -35,7 +44,7 @@ export class Base<Entity> implements Metadata {
     }
 
 
-    private static assign<T>(obj: any, newData: object) {
+    private static assign<T>(obj: any, newData: object): T {
         let result;
         const proto = Object.getPrototypeOf(obj);
         if (proto === null) {

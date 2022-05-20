@@ -26,7 +26,7 @@ export class Base<Entity> implements Metadata {
         }
 
         if (typeof data === 'object') {
-            plainToClassFromExist(this, data, options);
+            plainToClassFromExist(this, JSON.parse(JSON.stringify(data)), options);
         }
     }
 

@@ -1,5 +1,7 @@
 import {Base} from "../classes/base";
 import {model} from "../decorator/model";
+import {Type} from "class-transformer";
+import {IsEmail} from "class-validator";
 
 @model('uuid')
 export class Demo extends Base<Demo> {
@@ -58,11 +60,38 @@ setTimeout(() => {
 }, 1000)
 
 
-console.log(new Demo(JSON.stringify({
-    name: 'Lorem Ipsum',
-    optional: 'es simplemente el texto de relleno de las imprentas y archivos de texto',
-    arr: ['párrafos', 'palabras']
-})))
-
-
 console.log(new DemoSimple('El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras'))
+
+
+export class GenerateRequest extends Base<GenerateRequest> {
+
+    @Type(() => String)
+    productId: string;
+
+    @Type(() => String)
+    quantity: string;
+
+    @Type(() => Number)
+    paymentMethod?: number;
+
+    @IsEmail()
+    @Type(() => String)
+    email: string;
+
+    @Type(() => String)
+    optional?: string;
+}
+
+const n = new GenerateRequest("{\n" +
+    "    \"productId\": \"1530034a-61bf-40ae-b0d4-e0c03bf23be1\",\n" +
+    "    \"quantity\": \"1\",\n" +
+    "    \"paymentMethod\": \"9\",\n" +
+    "    \"email\": \"humberto@wildtripchile.cl\"\n" +
+    "}")
+
+console.log(new Demo({
+    name: n.productId,
+    optional: n.optional
+}))
+
+

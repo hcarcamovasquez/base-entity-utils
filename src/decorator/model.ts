@@ -25,6 +25,7 @@ const id = (seed?: string) => {
         return class extends constructor implements BaseIdIdentification {
             readonly id = seed ? v5(seed, v4()) : v4();
             readonly createdAt = new Date().toISOString();
+            readonly updatedAt = new Date().toISOString();
         }
     }
 }
@@ -35,6 +36,7 @@ const uuid = (seed?: string) => {
         return class extends constructor implements BaseUuidIdentification {
             readonly uuid = seed ? v5(seed, v4()) : v4();
             readonly createdAt = new Date().toISOString();
+            readonly updatedAt = new Date().toISOString();
         }
     }
 }

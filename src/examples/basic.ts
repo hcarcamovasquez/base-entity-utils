@@ -17,17 +17,15 @@ export class Demo extends Base<Demo> {
 @model('id')
 export class DemoUtil extends Base<DemoUtil> {
 
-    public readonly uuid: string;
+    public readonly id: string;
     public readonly name: string
     public readonly arr?: string[]
 }
 
-export class DemoSimple {
-    public readonly name: string
 
-    constructor(name: string) {
-        this.name = name
-    }
+export class DemoSimple extends Base<DemoSimple>{
+    public readonly id: string;
+    public readonly name: string
 }
 const name = new Demo({
     name: 'Lorem Ipsum',
@@ -44,7 +42,7 @@ console.log(name)
 Object.freeze(name)
 
 
-setTimeout(() => {
+
     const hola = Demo
         .copyOf<Demo>(name, {
             name: 'Aldus PageMaker, el cual incluye versiones de Lorem Ipsum',
@@ -57,10 +55,7 @@ setTimeout(() => {
         })
     Object.freeze(name)
     console.log(hola)
-}, 1000)
 
-
-console.log(new DemoSimple('El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras'))
 
 
 export class GenerateRequest extends Base<GenerateRequest> {
@@ -94,4 +89,8 @@ console.log(new Demo({
     optional: n.optional
 }))
 
+const m = new DemoSimple({
+    name: 'El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras'
+})
 
+console.log(DemoSimple.copyOf(m,{name: 'dwdwd'}))

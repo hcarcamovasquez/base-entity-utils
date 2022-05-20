@@ -33,8 +33,10 @@ export class Base<Entity> implements Metadata {
     static copyOf<T>(entity: T, updated: draft<T>): T {
 
         const updatedInmutable = plainToClassFromExist({}, updated, {ignoreDecorators: true})
-
-        Object.assign(updatedInmutable, {updatedAt: new Date().toISOString()})
+        console.log('entity.hasOwnProperty(\'createdAt\')', entity.hasOwnProperty('createdAt'))
+        if (entity.hasOwnProperty('createdAt')) {
+            Object.assign(updatedInmutable, {updatedAt: new Date().toISOString()})
+        }
 
         const e = Base.assign(entity, updatedInmutable) as T
 
